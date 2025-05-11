@@ -23,7 +23,10 @@ async function fetchAndStoreRates() {
           waitUntil: "networkidle2",
           timeout: 60000,
         });
-        return await page.$eval("#livePrice", (el) => el.textContent.trim().split(' ')[0]);
+        return await page.$eval(
+          "#livePrice",
+          (el) => el.textContent.trim().split(" ")[0]
+        );
       } catch (error) {
         console.error(`Error fetching rate for path "${path}":`, error);
         return null;
@@ -34,14 +37,14 @@ async function fetchAndStoreRates() {
     const gbp = await getRate("pound");
     const euro = await getRate("euro");
 
-    console.log("USD:", usd, "GBP:", gbp, "EUR:", euro);
+    console.log("USD:", usd, "\nGBP:", gbp, "\nEUR:", euro);
 
     if (usd && gbp && euro) {
       await supabase.from("black_market_rate").insert([
         {
-          usd: parseInt(usd, 10),
-          euro: parseInt(euro, 10),
-          gbp: parseInt(gbp, 10),
+          usd: parseFloat(usd, 10),
+          euro: parseFloat(euro, 10),
+          gbp: parseFloat(gbp, 10),
         },
       ]);
     } else {
