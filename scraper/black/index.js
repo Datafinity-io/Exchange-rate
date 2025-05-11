@@ -20,7 +20,7 @@ async function fetchAndStoreRates() {
       waitUntil: "networkidle2",
       timeout: 60000,
     });
-    return await page.$eval("#livePrice", (el) => el.textContent.trim());
+    return await page.$eval("#livePrice", (el) => el.textContent.trim().split(' ')[0]);
   };
 
   const usd = await getRate("");
@@ -29,7 +29,7 @@ async function fetchAndStoreRates() {
 
   console.log("USD:", usd, "GBP:", gbp, "EUR:", euro);
 
-  await supabase.from("exchange_rates").insert([{ usd, gbp, euro }]);
+  await supabase.from("black_market_rate").insert([{ usd, euro, gbp }]);
 
   await browser.close();
 }
