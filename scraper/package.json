@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node black/index.js"
+    "black": "node black/index.js",
+    "official": "node official/index.js"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
+    "axios": "^1.9.0",
     "dotenv": "^16.5.0",
     "node-cron": "^3.0.3",
     "puppeteer": "^24.6.1"
